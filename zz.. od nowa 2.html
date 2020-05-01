@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="js/build/three.js"></script>
+		<script>
+		var keys = [];
+           
+            document.addEventListener("keydown",(event) => {keys[event.which] = true; console.log(event.which)});
+            document.addEventListener("keyup",  (event) => keys[event.which] = false);
+			
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 10000);
+		
+		var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+		
+			
+			//PAS ZIELENI
+			var geometry = new THREE.PlaneGeometry(250,150,0);
+			var material = new THREE.MeshStandardMaterial( {color: 0x00ff00, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(0,0,-0.3);
+			scene.add(mesh);
+			
+			//DROGA
+			var geometry = new THREE.PlaneGeometry(50,120,30);
+			var material = new THREE.MeshStandardMaterial( {color: 0x000000, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			scene.add(mesh);
+			
+			
+			//CHODNIK PRAWY
+			var geometry = new THREE.PlaneGeometry(10,120,30);
+			var material = new THREE.MeshStandardMaterial( {color: 0xa3a3c2, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(40,0,0);
+			scene.add(mesh);
+			
+			//CHODNIK LEWY
+			var geometry = new THREE.PlaneGeometry(10,120,30);
+			var material = new THREE.MeshStandardMaterial( {color: 0xa3a3c2, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(-40,0,0);
+			scene.add(mesh);
+			
+			//BLOK PO PRAWEJ
+			var geometry = new THREE.BoxGeometry(40,40,50);
+			var material = new THREE.MeshStandardMaterial( {color: 0X0066ff, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(70,30,0);
+			scene.add(mesh);
+			
+
+			//BLOK PO LEWEJ
+			var geometry = new THREE.BoxGeometry(40,40,50);
+			var material = new THREE.MeshStandardMaterial( {color: 0X0066ff, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(-70,-30,0);
+			scene.add(mesh);
+			
+			//ROBOT
+			//SKRZYNKA
+			
+			var grupa=new THREE.Group();
+			var geometry = new THREE.BoxGeometry(20,20,10);
+			var material = new THREE.MeshStandardMaterial( {color: 0X004040, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(13,-25,0);
+			grupa.add(mesh)
+			//LUFA
+			var geometry = new THREE.BoxGeometry(5,5,5);
+			var material = new THREE.MeshStandardMaterial( {color: 0Xff0000, side: THREE.DoubleSide} );
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(13,-15,4);
+			grupa.add(mesh);
+			scene.add(grupa);
+			
+			camera.position.z = 100;
+
+			 
+			var light = new THREE.PointLight( 0xffffff, 5, 1000 );
+			light.position.set( 0, 0, 50 );
+			scene.add( light );
+			
+			requestAnimationFrame(ruch);
+			
+			function ruch()
+			{
+			if(keys[87] === true){
+			grupa.position.y+=0.5;
+			camera.position.y+=0.5;
+			};
+			if(keys[83] === true){
+			grupa.position.y-=0.5;
+			camera.position.y-=0.5;
+			};
+			if(keys[65] === true){
+			grupa.rotation.z-=0.01;
+			camera.rotation.z-=0.01;
+			};
+			if(keys[68] === true){
+			grupa.rotation.z+=0.01;
+			camera.rotation.z+=0.01;
+			};
+			if(keys[49] === true){
+			
+			camera.position.z = 40;
+			camera.position.y = -40;
+			camera.position.x = 10;
+			camera.rotation.x = 1;
+			camera.rotation.y = 0;
+			camera.rotation.z = 0;
+			};
+			if(keys[50] === true){
+			camera.position.z = 25;
+			camera.position.y = 10;
+			camera.position.x = 50;
+			camera.rotation.y = 1;
+			camera.rotation.x = -0.5;
+			camera.rotation.z = 2;
+			};
+			
+				renderer.render	(scene, camera);
+			requestAnimationFrame(ruch);
+			}
+			
+			renderer.render(scene, camera);
+			
+		</script>
+	</body>
+</html>
+

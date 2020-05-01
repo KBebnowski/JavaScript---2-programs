@@ -1,0 +1,144 @@
+<html>
+<head>
+	<title>threejs - basic</title>
+	
+	<style>
+		body{
+			margin 0;
+			overflow hidden;
+		}
+		
+		canvas{
+			background blue;
+		}
+	</style>
+</head>
+<body>
+
+	<canvas id="myCanvas"></canvas>
+	
+		<script src="js/build/three.js"></script>
+	<script>
+		var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('myCanvas'), antialias:true});
+		renderer.setClearColor(0x0000);
+		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		
+		var camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 0.1, 10000);
+		camera.position.z=7000;
+		
+		var scene=new THREE.Scene();
+		
+	 	//var light = new THREE.PointLight( 0xff0000, 1, 100 );
+		//light.position.set( geometry );
+			//scene.add( light );
+		var light = new THREE.PointLight( 0xffffff, 2, 100000 );
+		scene.add( light );
+		var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+		scene.add( light );
+
+		var geometry = new THREE.SphereGeometry(800, 800, 800);
+		var material = new THREE.MeshBasicMaterial({color: 0xffff00});
+		var mesh=new THREE.Mesh(geometry,material);
+		mesh.position.set(0,0,-200);
+		scene.add(mesh);
+		
+		var group2 = new THREE.Group();
+		var geometry2 = new THREE.SphereGeometry(50, 50, 50);
+		var material2 = new THREE.MeshPhongMaterial({color: 0xC0C0C0});
+		var mesh2=new THREE.Mesh(geometry2,material2);
+		mesh2.position.set(1000,0,-200);
+		group2.add(mesh2);
+		scene.add(group2);
+		//okresl adres sieci adres rozgloszeniowy 
+		/*
+		var group10 = new THREE.Group();
+		var geometry10 = new THREE.SphereGeometry(30, 30, 30);
+		var material0 = new THREE.MeshStandardMaterial({color: 0xC0C0C0});
+		var mesh10=new THREE.Mesh(geometry10,material10);
+		mesh10.position.set(2200,0,-200);
+		group10.add(mesh10);
+		*/
+		var group3 = new THREE.Group();
+		var geometry3 = new THREE.SphereGeometry(100, 100, 100);
+		var material3 = new THREE.MeshStandardMaterial({color: 0x800000});
+		var mesh3=new THREE.Mesh(geometry3,material3);
+		mesh3.position.set(1300,0,-200);
+		group3.add(mesh3);
+		//group3.add(group10);
+		scene.add(group3);
+		
+		
+		
+		
+		var group4 = new THREE.Group();
+		var geometry4 = new THREE.SphereGeometry(130, 130, 130);
+		var material4 = new THREE.MeshStandardMaterial({color: 0x00ffff});
+		var mesh4=new THREE.Mesh(geometry4,material4);
+		mesh4.position.set(1700,0,-200);
+		group4.add(mesh4);
+		scene.add(group4);
+		
+		var group5 = new THREE.Group();
+		var geometry5 = new THREE.SphereGeometry(80, 80, 80);
+		var material5 = new THREE.MeshStandardMaterial({color: 0x808000});
+		var mesh5=new THREE.Mesh(geometry5,material5);
+		mesh5.position.set(2100,0,-200);
+		group5.add(mesh5);
+		scene.add(group5);
+		
+		var group6 = new THREE.Group();
+		var geometry6 = new THREE.SphereGeometry(220, 220, 220);
+		var material6 = new THREE.MeshStandardMaterial({color: 0x3CB371});
+		var mesh6=new THREE.Mesh(geometry6,material6);
+		mesh6.position.set(2750,0,-200);
+		group6.add(mesh6);
+		scene.add(group6);
+		
+		var group7 = new THREE.Group();
+		var geometry7 = new THREE.SphereGeometry(180, 180, 180);
+		var material7 = new THREE.MeshStandardMaterial({color: 0xEE82EE});
+		var mesh7=new THREE.Mesh(geometry7,material7);
+		mesh7.position.set(3400,0,-200);
+		group7.add(mesh7);
+		scene.add(group7);
+		
+		var group8 = new THREE.Group();
+		var geometry8 = new THREE.SphereGeometry(170, 170, 170);
+		var material8 = new THREE.MeshStandardMaterial({color: 0x0000FF});
+		var mesh8=new THREE.Mesh(geometry8,material8);
+		mesh8.position.set(4000,0,-200);
+		group8.add(mesh8);
+		scene.add(group8);
+		
+	
+		requestAnimationFrame(render);
+		
+		function render() {
+			group2.rotation.y += 0.005;
+			group3.rotation.y += 0.006;
+			group4.rotation.y += 0.007;
+			group5.rotation.y += 0.008;
+			group6.rotation.y += 0.01;
+			group7.rotation.y += 0.012;
+			group8.rotation.y += 0.013;
+			mesh2.rotation.z += 0.005;
+			mesh3.rotation.z += 0.0075;
+			mesh4.rotation.z += 0.009;
+			mesh5.rotation.z += 0.0105;
+			mesh6.rotation.z += 0.012;
+			mesh7.rotation.z += 0.013;
+			mesh8.rotation.z += 0.015;
+						
+			renderer.render	(scene, camera);
+			requestAnimationFrame(render);
+		
+		}
+		
+		renderer.render(scene, camera);
+		
+		
+	</script>
+
+</body>
+</html>
